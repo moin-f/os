@@ -1,0 +1,101 @@
+/*Slip19_1: Write a program to accept the two dimensional array from user and display
+sum of its diagonal elements.*/
+
+import java.util.Scanner;
+class Array
+{
+public static void main(String args[])
+{
+int m, n, i, j,sum=0;
+Scanner sc=new Scanner(System.in);
+System.out.print("Enter order of matrix: ");
+m = sc.nextInt();
+int array[][] = new int[m][m];
+System.out.println("Enter the elements of the array: ");
+for (i = 0; i < m; i++)
+for (j = 0; j < m; j++)
+array[i][j] = sc.nextInt();
+System.out.println("Elements of the array are: ");
+for (i = 0; i < m; i++)
+{
+for (j = 0; j < m; j++)
+{
+System.out.print(array[i][j] + " ");
+if(i==j)
+sum+=array[i][j];
+}
+System.out.println();
+}
+System.out.println("Sum of Diagonal elements is "+sum);
+}
+}
+
+/*neo2@neo2-ThinkCentre-neo-50t-Gen-3:~/Desktop/arshil/JAVA-1/slip 19$ javac Array.java
+neo2@neo2-ThinkCentre-neo-50t-Gen-3:~/Desktop/arshil/JAVA-1/slip 19$ java Array
+Enter order of matrix: 2
+Enter the elements of the array: 
+1 2 
+3 4
+Elements of the array are: 
+1 2 
+3 4 
+Sum of Diagonal elements is 5
+*/
+
+
+
+/*Slip19_2: Write a program which shows the combo box which includes list of
+T.Y.B.Sc.(Comp. Sci) subjects. Display the selected subject in a text field*/
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class ComboBoxExample {
+
+    JFrame f;
+    JTextField t1;
+
+    ComboBoxExample() {
+        f = new JFrame("ComboBox Example");
+
+
+        t1 = new JTextField(25);
+
+
+        final JLabel label = new JLabel();
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setPreferredSize(new Dimension(400, 30));
+
+
+        String languages[] = {"C", "C++", "C#", "Java", "PHP"};
+        final JComboBox<String> cb = new JComboBox<>(languages);
+
+
+        JButton b = new JButton("Show");
+
+
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String data = "Programming language Selected: " + cb.getItemAt(cb.getSelectedIndex());
+                t1.setText(data);
+            }
+        });
+
+
+        f.add(cb);
+        f.add(b);
+        f.add(t1);
+        f.add(label);
+
+        f.setLayout(new FlowLayout());
+        f.setSize(400, 200);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        f.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new ComboBoxExample();
+    }
+}
+

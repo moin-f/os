@@ -1,0 +1,170 @@
+slip_29-1
+
+import java.util.Scanner; 
+class Customer 
+{
+    int cno; 
+    String cname, cmob, cadd; 
+
+    public static void main(String [] args) 
+    { 
+        int i=0; 
+
+        Scanner sc = new Scanner(System.in); 
+        Customer ob[]=new Customer[5]; 
+
+        for(i=0;i<5;i++) 
+        { 
+            System.out.println("Enter cno,cname,cmob,cadd"); 
+            ob[i]=new Customer(); 
+            ob[i].cno=sc.nextInt(); 
+            ob[i].cname=sc.next(); 
+            ob[i].cmob=sc.next(); 
+            ob[i].cadd=sc.next(); 
+        } 
+
+        // ✅ Initialize mb before using it
+        System.out.print("enter mob to search: ");
+        String mb = sc.next();  
+
+        for(i=0;i<5;i++) 
+        { 
+            // ✅ Correct comparison
+            if(mb.equals(ob[i].cmob)) 
+            { 
+                System.out.println("Name" + ob[i].cname); 
+            } 
+        } 
+    } 
+}
+
+/*nhs@nhs-OptiPlex-3046:~/.xyz/ALL_SLIP_JAVA/slip29$ javac Customer.java
+nhs@nhs-OptiPlex-3046:~/.xyz/ALL_SLIP_JAVA/slip29$ java Customer
+Enter cno,cname,cmob,cadd
+67
+mamz
+89786
+767
+Enter cno,cname,cmob,cadd
+87
+mj
+77867
+989
+Enter cno,cname,cmob,cadd
+*/
+
+
+
+slip_29-2
+
+import java.io.*; 
+class Vehicle 
+ {  
+  String company; 
+  double price;
+  public void accept() throws IOException 
+   { 
+    System.out.println("Enter the Company and price of the Vehicle: "); 
+    BufferedReader br=new BufferedReader(new 
+InputStreamReader(System.in)); 
+    company=br.readLine(); 
+    price=Double.parseDouble(br.readLine()); 
+   
+ } 
+  public void display() 
+  { 
+   System.out.println("Company: "+company+" Price: "+price); 
+  } 
+  
+   } 
+class LightMotorVehicle extends Vehicle 
+ { 
+  double mileage; 
+   public void accept() throws IOException 
+   { 
+   super.accept(); 
+    System.out.println("Enter the mileage of the vehicle: "); 
+    BufferedReader br=new BufferedReader(new 
+InputStreamReader(System.in)); 
+    mileage=Double.parseDouble(br.readLine()); 
+ } 
+  public void display() 
+  { 
+   super.display(); 
+   System.out.println("Mileage: "+mileage); 
+  } 
+ } 
+  
+class HeavyMotorVehicle extends Vehicle 
+ { 
+  double captons; 
+      public void accept() throws IOException 
+ { 
+ super.accept(); 
+ System.out.println("Enter the capacity of vehicle in tons: "); 
+ BufferedReader br=new BufferedReader(new InputStreamReader(System.in)); 
+   captons=Double.parseDouble(br.readLine()); 
+ } 
+    public void display() 
+ { 
+     super.display(); 
+     System.out.println("Capacity in tons: "+captons); 
+         } 
+} 
+ 
+class Sa3 
+{ 
+ public static void main(String [] args) throws IOException 
+ { 
+  int i; 
+  System.out.println("Enter the type of vehicle: "); 
+  BufferedReader br=new BufferedReader(new InputStreamReader(System.in)); 
+  System.out.println("1.Light Vehicle"); 
+  System.out.println("2.Heavy Vehicle"); 
+  int ch=Integer.parseInt(br.readLine()); 
+  switch(ch) 
+  { 
+     case 1:  
+          System.out.println("Enter the number of Light vehicles: "); 
+          int n=Integer.parseInt(br.readLine()); 
+          LightMotorVehicle [] l=new LightMotorVehicle[n]; 
+            for(i=0;i<n;i++) 
+   { 
+               l[i]=new LightMotorVehicle(); 
+               l[i].accept(); 
+            } 
+             for(i=0;i<n;i++) 
+    { 
+                l[i].display(); 
+              } 
+      break; 
+  case 2: 
+            System.out.println("Enter the number of Heavy vehicles: "); 
+            int m=Integer.parseInt(br.readLine()); 
+            HeavyMotorVehicle [] h=new HeavyMotorVehicle[m]; 
+            for(i=0;i<m;i++) 
+   { 
+             h[i]=new HeavyMotorVehicle(); 
+     h[i].accept();  
+    } 
+   for(i=0;i<m;i++){ 
+    h[i].display(); 
+   } 
+   break;  
+   }  
+  }  
+ 
+} 
+
+/*hs@nhs-OptiPlex-3046:~/.xyz/ALL_SLIP_JAVA/slip29$ javac Sa3.java
+nhs@nhs-OptiPlex-3046:~/.xyz/ALL_SLIP_JAVA/slip29$ java Sa3
+Enter the type of vehicle: 
+1.Light Vehicle
+2.Heavy Vehicle
+1
+Enter the number of Light vehicles: 
+5
+Enter the Company and price of the Vehicle: 
+6
+
+*/

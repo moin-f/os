@@ -1,0 +1,139 @@
+slip_26-1
+
+import java.io.*; 
+import java.util.*; 
+ 
+class Donor implements Serializable {  
+    String name, address, group; 
+    int age, lod; 
+    String contact;   
+ 
+    public Donor(String name, String address, String group, int age, String contact, int lod) { 
+        this.name = name; 
+        this.address = address; 
+        this.group = group; 
+        this.age = age;
+        this.contact = contact; 
+        this.lod = lod; 
+    } 
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Age: " + age + ", Address: " + address +
+               ", Contact: " + contact + ", Group: " + group +
+               ", Last Donation: " + lod + " months ago";
+    }
+ 
+    public static void main(String args[]) { 
+        Scanner s = new Scanner(System.in); 
+        System.out.println("Enter how many records you want"); 
+        int n = s.nextInt(); 
+        s.nextLine(); // consume leftover newline
+ 
+        try { 
+            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream("save.txt")); 
+            Donor d[] = new Donor[n]; 
+ 
+            for(int i=0; i<n; i++) { 
+                System.out.println("Name: "); 
+                String name = s.nextLine(); 
+                System.out.println("Age: "); 
+                int age = s.nextInt(); 
+                s.nextLine(); // consume newline
+                System.out.println("Address: "); 
+                String address = s.nextLine(); 
+                System.out.println("Contact: "); 
+                String contact = s.nextLine(); 
+                System.out.println("Group: "); 
+                String group = s.nextLine(); 
+                System.out.println("Last donation (in months): "); 
+                int lod = s.nextInt(); 
+                s.nextLine(); // consume newline
+ 
+                d[i] = new Donor(name, address, group, age, contact, lod); 
+                o.writeObject(d[i]); 
+            } 
+            o.close();
+        }  
+        catch(IOException e) { 
+            System.out.println(e); 
+        } 
+
+        try { 
+            ObjectInputStream z = new ObjectInputStream(new FileInputStream("save.txt")); 
+            for(int i=0; i<n; i++) { 
+                Donor d = (Donor)z.readObject(); 
+                if(d.group.equalsIgnoreCase("A+ve") && d.lod >= 6) { 
+                    System.out.println(d);   
+                }
+            } 
+            z.close();
+        }  
+        catch(Exception e) { 
+            System.out.println(e); 
+        } 
+    } 
+}
+/* 3046:~/.xyz/ALL_SLIP_JAVA/slip26$ javac Donor.java
+nhs@nhs-OptiPlex-3046:~/.xyz/ALL_SLIP_JAVA/slip26$ java Donor
+Enter how many records you want
+2
+Name: 
+zishan
+Age: 
+45
+Address: 
+jumri talayya
+Contact: 
+8989006785
+Group: 
+b+
+Last donation (in months): 
+2
+Name: 
+danish
+Age: 
+56
+Address: 
+yeola
+Contact: 
+67897689
+Group: 
+a+
+Last donation (in months): 
+5
+nhs@nhs-OptiPlex-3046:~/.xyz/ALL_SLIP_JAVA/slip26$ 
+*/
+
+
+
+slip_26-2
+
+class Item 
+{ 
+ int ino; 
+ String iname; 
+ double iprice; 
+ static int count=0; 
+ Item() 
+ { } 
+ Item(int no,String nm,double d) 
+ { 
+ ino=no; 
+ nm=iname; 
+ iprice=d; 
+ count++; 
+ } 
+ public void display() 
+ { 
+ System.out.println("Total objects created "+count); 
+ System.out.println(ino+" "+iname+" "+iprice); 
+ } 
+ public static void main(String args[]) 
+ { 
+ Item ob1=new Item(1,"Laptop",20000.00); 
+ ob1.display(); 
+ Item ob2=new Item(1,"Laptop",20000.00); 
+ ob2.display(); 
+ } 
+}

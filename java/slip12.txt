@@ -1,0 +1,181 @@
+import java.util.*;
+class college
+{
+int no;
+String name;
+String addr;
+}
+class Dept extends college
+{
+int dno;
+String dname;
+Scanner sc = new Scanner(System.in);
+public void accept()
+{
+System.out.println("enter no");
+no=sc.nextInt();
+System.out.println("enter name");
+name=sc.next();
+System.out.println("enter college address");
+addr=sc.next();
+System.out.println("enter depatrment no");
+dno=sc.nextInt();
+System.out.println("enter department name");
+dname=sc.next();
+}
+public void display()
+{
+System.out.println("college no"+no);
+System.out.println("college name"+name);
+System.out.println("college address"+addr);
+System.out.println("department number"+dno);
+System.out.println("department number"+dname);
+}
+public static void main(String a[])
+{
+Dept ob=new Dept();
+ob.accept();
+ob.display();
+}
+}
+
+/** nhs@nhs-OptiPlex-3046:~/Desktop/Ramiz Sayyed/JAVA 11-16$ javac Dept.java
+nhs@nhs-OptiPlex-3046:~/Desktop/Ramiz Sayyed/JAVA 11-16$ java Dept
+enter no
+2
+enter name
+Ramiz
+enter college address
+Nashik
+enter depatrment no
+12
+enter department name
+bsc 
+college no2
+college nameRamiz
+college addressNashik
+department number12
+department numberbsc
+nhs@nhs-OptiPlex-3046:~/Desktop/Ramiz Sayyed/JAVA 11-16$ 
+
+**/
+
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Slip12 extends JFrame implements ActionListener {
+    int v1, v2, result;
+    JTextField t;
+    JButton[] b = new JButton[10];
+    JButton add, sub, mul, div, clear, equals;
+    char choice;
+    JPanel p, p1;
+
+    public Slip12() {
+        setLayout(new BorderLayout());
+
+        // Text field panel
+        p = new JPanel();
+        t = new JTextField(20);
+        p.add(t);
+
+        // Buttons panel
+        p1 = new JPanel();
+        p1.setLayout(new GridLayout(4, 4, 5, 5)); // 4x4 grid with spacing
+
+        // Create digit buttons 0–9
+        for (int i = 0; i < 10; i++) {
+            b[i] = new JButton("" + i);
+            b[i].addActionListener(this);
+        }
+
+        // Create operation buttons
+        equals = new JButton("=");
+        add = new JButton("+");
+        sub = new JButton("-");
+        mul = new JButton("*");
+        div = new JButton("/");
+        clear = new JButton("C");
+
+        // Add ActionListeners for operation buttons
+        equals.addActionListener(this);
+        add.addActionListener(this);
+        sub.addActionListener(this);
+        mul.addActionListener(this);
+        div.addActionListener(this);
+        clear.addActionListener(this);
+
+        // Add buttons to panel (simple layout)
+        for (int i = 1; i <= 9; i++) {
+            p1.add(b[i]);
+        }
+        p1.add(add);
+        p1.add(b[0]);
+        p1.add(sub);
+        p1.add(mul);
+        p1.add(div);
+        p1.add(equals);
+        p1.add(clear);
+
+        // Add panels to frame
+        add(p, BorderLayout.NORTH);
+        add(p1, BorderLayout.CENTER);
+
+        // Frame properties
+        setTitle("Simple Calculator");
+        setSize(300, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public void actionPerformed(ActionEvent ae) {
+        String str = ae.getActionCommand();
+        char ch = str.charAt(0);
+
+        if (Character.isDigit(ch)) {
+            t.setText(t.getText() + str);
+        } else if (str.equals("+")) {
+            v1 = Integer.parseInt(t.getText());
+            choice = '+';
+            t.setText("");
+        } else if (str.equals("-")) {
+            v1 = Integer.parseInt(t.getText());
+            choice = '-';
+            t.setText("");
+        } else if (str.equals("*")) {
+            v1 = Integer.parseInt(t.getText());
+            choice = '*';
+            t.setText("");
+        } else if (str.equals("/")) {
+            v1 = Integer.parseInt(t.getText());
+            choice = '/';
+            t.setText("");
+        } else if (str.equals("=")) {
+            v2 = Integer.parseInt(t.getText());
+            switch (choice) {
+                case '+':
+                    result = v1 + v2;
+                    break;
+                case '-':
+                    result = v1 - v2;
+                    break;
+                case '*':
+                    result = v1 * v2;
+                    break;
+                case '/':
+                    result = v1 / v2;
+                    break;
+            }
+            t.setText("" + result);
+        } else if (str.equals("C")) {
+            t.setText("");
+        }
+    }
+
+    public static void main(String[] args) {
+        new Slip12();
+    }
+}
+
